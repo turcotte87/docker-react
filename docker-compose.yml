@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web: #nomme le premier container
+    build: 
+      context: . #permet de dire le contexte dans notre source code
+      dockerfile: Dockerfile.dev #permet de définir le dockerfile a utiliser (puisque .dev on trouverait pas sans ça)
+    ports:
+      - "3000:3000" #bind notre port 3000 avec le port 3000 du container
+    volumes:
+      - /app/node_modules #on dit a docker de s'occuper lui-même de ce fichier
+      - .:/app #on dit a docker de prendre tout ce qu'on a (.) et le lié dans dossier app (workdir de notre dockerfile)
+  tests: #nomme le deuxieme container
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    volumes:
+      - /app/node_modules
+      - .:/app
+    command: ["npm", "run", "test"] #on override la commande du Dockerfile.dev
