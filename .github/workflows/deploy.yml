@@ -25,5 +25,5 @@ jobs:
           environment_name: Frontend-env-1
           existing_bucket_name: elasticbeanstalk-ca-central-1-943378954913
           region: ca-central-1
-          version_label: ${{ github.sha }}
+          version_label: ${{ github.sha }}-${{ github.run_number }}
           deployment_package: deploy.zip
